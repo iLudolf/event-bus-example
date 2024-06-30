@@ -22,8 +22,6 @@ export class EventBus implements OnModuleDestroy {
   /**
    * @description
    * Returns an RxJS Observable stream of events of the given type.
-   * If the event contains a {@link RequestContext} object, the subscriber
-   * will only get called after any active database transactions are complete.
    *
    * This means that the subscriber function can safely access all updated
    * data related to the event.
@@ -39,8 +37,6 @@ export class EventBus implements OnModuleDestroy {
   /**
    * @description
    * Returns an RxJS Observable stream of events filtered by a custom predicate.
-   * If the event contains a {@link RequestContext} object, the subscriber
-   * will only get called after any active database transactions are complete.
    *
    * This means that the subscriber function can safely access all updated
    * data related to the event.

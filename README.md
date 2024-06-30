@@ -1,73 +1,43 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Implementação do Event Bus em Node.js com NestJS e RxJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Você já implementou esse padrão em algum projeto? Veja como é interessante e simples. Podemos transformar completamente o comportamento da nossa aplicação!
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Imagine ter uma aplicação de grande escala contendo muitas classes interagindo entre si, e você deseja uma maneira de fazer com que essas classes se comuniquem, mantendo os princípios de baixo acoplamento e separação de responsabilidades. O padrão Event Bus pode ser uma excelente solução para o seu problema.
 
-## Description
+## O que é um Event Bus?
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+A ideia de um barramento de eventos é bastante semelhante ao barramento estudado em redes (topologia de barramento). No nível dos componentes de uma aplicação, os "computadores" são os componentes do seu aplicativo, a "mensagem" é o evento ou os dados que você deseja comunicar e o "pipeline" é o seu objeto EventBus.
 
-## Installation
+## Exemplo de Uso
 
-```bash
-$ yarn install
+Neste exemplo, vamos mostrar como usar um Event Bus em uma aplicação Node.js utilizando o framework NestJS.
+
+### Estrutura do Projeto
+
+```
+src/
+├── common/ # Pacote de arquivos compartilhados
+├── email-handlers/ # Módulo do serviço que simula o envio de e-mail
+├── event-bus/ # Módulo do event-bus
+└── user/ # Módulo de usuário
 ```
 
-## Running the app
+### Implementação com RxJS
 
-```bash
-# development
-$ yarn run start
+Para implementar o Event Bus em nosso projeto de exemplo, utilizaremos a biblioteca RxJS (Reactive Extensions for JavaScript), conhecida por sua programação reativa em JavaScript. Ela é especialmente útil para lidar com fluxos de eventos assíncronos de maneira simples e declarativa.
 
-# watch mode
-$ yarn run start:dev
+#### Exemplo de Implementação
 
-# production mode
-$ yarn run start:prod
-```
+Aqui está a implementação do serviço em nosso módulo EventBus, utilizando RxJS. Nele, temos métodos como `publish` e `ofType`, que facilitam o envio e a recepção de eventos de forma intuitiva.
 
-## Test
+### Exemplo Prático
 
-```bash
-# unit tests
-$ yarn run test
+Criamos um modelo de evento para o registro de contas. Cada vez que um usuário é criado, um novo evento é publicado para informar ao sistema sobre os dados desse novo usuário.
 
-# e2e tests
-$ yarn run test:e2e
+### Inscrição em Eventos
 
-# test coverage
-$ yarn run test:cov
-```
+Desenvolvemos um módulo chamado `email-handlers` para simular um serviço de envio de e-mail. Por enquanto, estamos apenas exibindo logs dos eventos para demonstrar que tanto a publicação quanto a inscrição nesses eventos estão funcionando.
 
-## Support
+### Benefícios
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+A implementação do EventBus pode ser benéfica para sua base de código, pois ajuda a acoplar livremente suas classes e promove um padrão de publicação-assinatura. Também facilita a interação entre componentes sem que eles estejam cientes uns dos outros.

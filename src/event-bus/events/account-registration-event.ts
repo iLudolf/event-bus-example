@@ -4,7 +4,6 @@ import { User } from '../../common/entity-types';
 /**
  * @description
  * This event is fired when a new user registers an account, either as a stand-alone signup or after
- * placing an order.
  *
  * @docsCategory events
  */

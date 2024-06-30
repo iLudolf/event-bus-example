@@ -7,13 +7,21 @@ import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class UserService {
   private users: User[] = [];
-
   constructor(private readonly eventBus: EventBus) {}
 
+  /**
+   * @description
+   * Returns all users.
+   * */
   getUsers(): Array<User> {
     return this.users;
   }
 
+  /**
+   * @description
+   * Create a new user and publish an event to the event bus.
+   * @param user
+   * */
   createUser(user: Omit<User, 'id'>): User {
     const newUser: User = {
       id: uuidv4(),
@@ -21,7 +29,6 @@ export class UserService {
       verified: false,
       lastLogin: new Date(),
       createdAt: new Date(),
-      updatedAt: new Date(),
     };
 
     this.users.push(newUser);
